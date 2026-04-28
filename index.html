@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File a Complaint - Prithis App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0E0F11;
+            color: #DBDEE1;
+            line-height: 1.7;
+            padding: 20px;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+        h1 { color: #5865F2; font-size: 1.8rem; margin: 1.5rem 0 0.8rem; border-bottom: 2px solid #5865F2; padding-bottom: 0.5rem; }
+        p { margin: 0.5rem 0 1rem; }
+        .notice {
+            background: #1E1F22;
+            border-left: 4px solid #57F287;
+            padding: 14px 18px;
+            margin: 1rem 0 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+        label {
+            display: block;
+            color: #DBDEE1;
+            font-weight: 600;
+            margin: 1rem 0 0.4rem;
+            font-size: 0.9rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: #161718;
+            border: 1px solid #2C2D31;
+            border-radius: 8px;
+            color: #DBDEE1;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { border-color: #5865F2; }
+        select option { background: #161718; color: #DBDEE1; }
+        textarea { min-height: 130px; resize: vertical; }
+        button[type="submit"] {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 12px 32px;
+            background: #5865F2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button[type="submit"]:hover { background: #4752C4; }
+        .required { color: #F23F43; font-size: 0.8rem; margin-left: 4px; }
+        .success-banner {
+            display: none;
+            background: #1E1F22;
+            border-left: 4px solid #57F287;
+            padding: 16px 20px;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .success-banner h3 { color: #57F287; margin-bottom: 0.3rem; }
+        .success-banner p { color: #DBDEE1; margin: 0; }
+        footer { margin-top: 2rem; border-top: 1px solid #2C2D31; padding-top: 1rem; color: #80848E; font-size: 0.8rem; }
+        footer a { color: #5865F2; }
+    </style>
+</head>
+<body>
+
+<h1>File Your Complaint</h1>
+<p>Have an issue? Let us know and we will try to reach you soon.</p>
+
+<div class="notice">
+    <strong>We will try to reach you as soon as possible.</strong> Every complaint is reviewed and you will receive a response at the email you provide.
+</div>
+
+<form id="complaintForm" action="https://formsubmit.co/prithvipatil494@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="Prithis App — User Complaint" />
+    <input type="hidden" name="_captcha" value="true" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_next" value="" id="redirectUrl" />
+    <input type="text" name="_honey" style="display:none" />
+
+    <label for="name">Name <span class="required">*</span></label>
+    <input type="text" id="name" name="name" placeholder="Your name" required />
+
+    <label for="email">Email <span class="required">*</span></label>
+    <input type="email" id="email" name="email" placeholder="your@email.com" required />
+
+    <label for="category">Complaint Type <span class="required">*</span></label>
+    <select id="category" name="category" required>
+        <option value="" disabled selected>Select a category</option>
+        <option value="Account Issue">Account Issue</option>
+        <option value="Spam / Abuse">Spam / Abuse</option>
+        <option value="Privacy Concern">Privacy Concern</option>
+        <option value="Bug / App Not Working">Bug / App Not Working</option>
+        <option value="Account Deletion">Account Deletion Request</option>
+        <option value="Data Removal">Data Removal Request</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <label for="message">Your Complaint <span class="required">*</span></label>
+    <textarea id="message" name="message" placeholder="Describe your complaint in detail..." required></textarea>
+
+    <button type="submit">Submit Complaint</button>
+</form>
+
+<div class="success-banner" id="successBanner">
+    <h3>Complaint Submitted!</h3>
+    <p>Thank you. We have received your complaint and will try to reach you soon at the email you provided.</p>
+</div>
+
+<footer>
+    <p>Prithis App &middot; <a href="mailto:prithvipatil494@gmail.com">Email Us Directly</a></p>
+</footer>
+
+<script>
+    const redirectUrl = document.getElementById('redirectUrl');
+    const baseUrl = window.location.href.split('?')[0];
+    redirectUrl.value = baseUrl + '?success=true';
+
+    if (new URLSearchParams(window.location.search).get('success') === 'true') {
+        document.getElementById('complaintForm').style.display = 'none';
+        document.getElementById('successBanner').style.display = 'block';
+        window.history.replaceState({}, '', baseUrl);
+    }
+</script>
+
+</body>
+</html>
